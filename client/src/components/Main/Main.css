@@ -1,0 +1,96 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  flex-grow: 1;
+  width: 100%;
+  background: linear-gradient(90deg, #808080 0%, #d3d3d3 100%);
+}
+
+.MainWrapper {
+  width: 600px;
+}
+
+.MainWrapper h1 {
+  color: white;
+  margin-left: 10px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: #fff;
+}
+
+.codContainer {
+  width: 20%;
+  margin-right: 10px;
+}
+
+.numberContainer {
+  width: 50%;
+  margin-right: 10px;
+}
+
+button{
+  width: 20%;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  background: #2884f6;
+  color: #fff;
+  height: 33px;
+  margin: 0 0 5px;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, .3);
+}
+
+button:disabled {
+  background: #ccc;
+  color: #000;
+  cursor: not-allowed;
+}
+
+label {
+  margin-bottom: 3px;
+  padding: 0;
+  display: block;
+  font-weight: bold;
+}
+
+select {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #bebebe;
+  padding: 7px;
+  margin: 0 0 5px;
+  width: 100%;
+  outline: none;
+  transition: all 300ms ease-in-out;
+}
+input {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #bebebe;
+  padding: 7px;
+  margin: 0 0 5px;
+  height: 33px;
+  width: 100%;
+  outline: none;
+  transition: all 300ms ease-in-out;
+}
+
+span {
+  color: red;
+  font-weight: bold;
+  position: absolute;
+}
