@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Main.css'
@@ -17,8 +17,19 @@ const initialValue = {
     initialCode: '+7',
 }
 
+const socket = new WebSocket('ws://localhost:5000')
+
 const [value, setValue] = useState(initialValue)
+const numbern = useRef()
 const dispatch = useDispatch()
+useEffect(() => {
+  axios.get('http://localhost:5000')
+    .then(response => dispatch({type: 'UPD_CONTACTS', payload: response.data}))
+}, [])
+
+socket.onmessage = (e) => {
+  dispatch({type: 'UPD_CONTACTS', payload: JSON.parse(e.data)})
+}
 
 function validateControle(value, required, minLength, maxLength){
   let isValid = true
@@ -42,12 +53,8 @@ function onChangeHandl(event){
 }
 
 const newNumber = async (code, number) => {
-  try {
-    const response = await axios.post('http://localhost:5000', {code, number})
-    dispatch({type: 'UPD_CONTACTS', payload: response.data})
-  } catch (error) {
-    alert(error)
-  }
+  socket.send(JSON.stringify({ code, number}))
+  numbern.current.value = ''
 }
 
   return (
@@ -65,7 +72,7 @@ const newNumber = async (code, number) => {
           </div>
           <div className='numberContainer'>
             <label>Введите номер</label>
-            <input type='text' value={value.value} onChange={event => onChangeHandl(event)}></input>
+            <input type='text' value={value.value} ref={numbern} onChange={event => onChangeHandl(event)}></input>
             {!value.valid && value.touched
             ? <span>Введите корректный номер</span>
             : null}
